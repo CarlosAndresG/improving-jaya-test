@@ -5,6 +5,7 @@ module Api
 
       def create
         Issue.transaction(requires_new: true) do
+          #test ngrok
           byebug
           data_hash = JSON.parse(payload)
           pp data_hash
