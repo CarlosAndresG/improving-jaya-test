@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  action: MyString
+  sender: 
+  repository: 
+  organization: 
+  installation: 
+  issue_id: 1
+
+two:
+  action: MyString
+  sender: 
+  repository: 
+  organization: 
+  installation: 
+  issue_id: 1
