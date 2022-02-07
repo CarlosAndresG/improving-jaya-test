@@ -10,17 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_06_174730) do
+ActiveRecord::Schema.define(version: 2022_02_06_123757) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "events", force: :cascade do |t|
     t.string "action"
-    t.jsonb "sender"
-    t.jsonb "repository"
-    t.jsonb "organization"
-    t.jsonb "installation"
+    t.jsonb "payload"
     t.integer "issue_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -28,7 +25,7 @@ ActiveRecord::Schema.define(version: 2022_02_06_174730) do
   end
 
   create_table "issues", force: :cascade do |t|
-    t.string "description"
+    t.jsonb "issue"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "number"

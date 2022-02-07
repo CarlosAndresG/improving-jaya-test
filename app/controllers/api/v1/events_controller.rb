@@ -5,7 +5,6 @@ module Api
 
       def index
         issue = Issue.includes(:events).find_by!(number: number)
-        # render json: issue.events.paginate(page: params[:page]).order('id DESC')
         render json: issue.events
       end
 

@@ -1,24 +1,54 @@
-# README
+# My Improving Jaya Test
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Because special features (jsonb attributes) this installation requires postgres.  I used ngrok for forwarding.
 
-Things you may want to cover:
+The versions that you need to run this test:
 
-* Ruby version
+* Ruby 3.0.1
 
-* System dependencies
+* Rails 6.1.4.4
 
-* Configuration
 
-* Database creation
+## Step by Step - Run application
 
-* Database initialization
+* bundle install
 
-* How to run the test suite
+* rails db:create && rails db:migrate
 
-* Services (job queues, cache servers, search engines, etc.)
+* Create a .env file in the root folder
 
-* Deployment instructions
+```
+POSTGRES_USER=xxxxxx
+POSTGRES_PASSWORD=xxxxxx
+RAILS_MAX_THREADS=24
+RAILS_MIN_THREADS=12
+POSTGRES_PORT=xxxx
+POSTGRES_HOST=xxx.xxx.xxx.xxx
+NGROK_HOST=xxxxx.ngrok.io
+```
 
-* ...
+* Generate the secret in terminal:
+```
+ruby -rsecurerandom -e 'puts SecureRandom.hex(20)'
+```
+
+* and add it to your client credentials with your favourite editor (Vscode in my case). (This secret must be provided in the webhook configuration)
+```
+EDITOR='code --wait' rails credentials:edit
+
+github:
+  secret_access_key: XXXXXXXXXXXXXXXXXXXXXXXX
+```
+
+
+## Run rails server
+
+bundle exec rails server 
+
+## Run ngrok
+
+ngrok http 3000
+
+## Run tests
+
+rspec

@@ -1,16 +1,18 @@
 module Api
   module V1
     class IssuesController < BaseController
-      # include ApiAccessible
+      include ApiAccessible
 
       def create
         Issue.transaction(requires_new: true) do
           #test ngrok
-          issue = Issue.find_or_create_by!(number: issue_number)
+          issue = Issue.find_or_create_by!(number: issue_number) do
+             issue = issue_payload
+          end
+          
           issue.events.create!(
-            repository: repository_params,
-            sender: sender_params,
-            action: params[:action]
+            payload: payload,
+            action: action_payload
           )
         end
 
@@ -23,13 +25,19 @@ module Api
         params[:issue][:number]
       end
 
-      def repository_params
-        params.require(:repository)
+      def action_payload
+        request.request_parameters['action']
       end
 
-      def sender_params
-        params.require(:sender)
+      def issue_payload
+        params.require(:issue)
       end
+
+      def payload
+        params.except(:issue, :action, :format)
+      end
+
+
     end
   end
 end
