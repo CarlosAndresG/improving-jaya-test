@@ -10,7 +10,7 @@ Rails.application.configure do
 
   #ngrok 
   # config.hosts << "<%= ENV['NGROK_HOST'] %>"
-  config.hosts << "0b62-191-156-0-63.ngrok.io"
+  config.hosts << "8ed2-181-62-52-73.ngrok.io"
 
   # Do not eager load code on boot.
   config.eager_load = false

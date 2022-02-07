@@ -6,12 +6,12 @@ module Api
       def create
         Issue.transaction(requires_new: true) do
           #test ngrok
-          byebug
-          data_hash = JSON.parse(payload)
-          pp data_hash
-          byebug
           issue = Issue.find_or_create_by!(number: issue_number)
-          issue.events.create!(:action, :sender, :repository, :organization, :installation, :issue_id)
+          issue.events.create!(
+            repository: repository_params,
+            sender: sender_params,
+            action: params[:action]
+          )
         end
 
         render nothing: true, status: :created
@@ -23,8 +23,12 @@ module Api
         params[:issue][:number]
       end
 
-      def payload
-        params.except(:issue)
+      def repository_params
+        params.require(:repository)
+      end
+
+      def sender_params
+        params.require(:sender)
       end
     end
   end
